@@ -22,6 +22,7 @@ public:
     void intializeBugs(const string &filename);
     vector<Bug*> getBugs() const;
     void displayAllBugs() const;
+    void findAndDisplayBug(int id) const;
 };
 
 

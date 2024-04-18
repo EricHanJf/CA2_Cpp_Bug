@@ -67,20 +67,32 @@ void board::intializeBugs(const std::string& filename) {
 }
 
 
-#include <iomanip> // Required for std::setw and std::left
-
 void board::displayAllBugs() const {
-    std::cout << "Display all Bugs:\n";
-    std::cout << std::left; // Align all text to the left
+    cout << "Display all Bugs:\n";
+    cout << left;
     for (const Bug* bug : bug_vector) {
-        std::string type = dynamic_cast<const Crawler*>(bug) ? "Crawler" : "Hopper";
-        std::cout << std::setw(5) << bug->getID() << " "
-                  << std::setw(8) << type << " "
+        string type = dynamic_cast<const Crawler*>(bug) ? "Crawler" : "Hopper";
+        cout << setw(5) << bug->getID() << " "
+                  << setw(8) << type << " "
                   << "(" << bug->getPosition().first << ","
                   << bug->getPosition().second << setw(3) << ") "
-                  << std::setw(3) << bug->getSize() << " "
-                  << std::setw(6) << (bug->isAlive() ? "Alive" : "Dead") << std::endl;
+                  << setw(3) << bug->getSize() << " "
+                  << setw(6) << (bug->isAlive() ? "Alive" : "Dead") << endl;
     }
 }
 
+void board::findAndDisplayBug(int id) const{
+    for(const Bug* bug: bug_vector){
+        if(bug ->getID() == id){
+            cout << "Bug found: \n";
+            cout << "ID: " << bug->getID() << ", Type: "
+            << (dynamic_cast<const Crawler*>(bug)? "Crawler": "Hopper")
+            << ", Position: (" << bug->getPosition().first << "," << bug->getPosition().second
+            << "), Size: " << bug->getSize()
+            << ", Status: " << (bug->isAlive() ? "Alive" : "Dead") << endl;
+            return;
+        }
+    }
+    cout << "Bug Id: "<< id << " Not found" <<endl;
+}
 
