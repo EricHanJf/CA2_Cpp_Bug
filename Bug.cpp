@@ -32,6 +32,10 @@ int Bug::getID() const {
     return id;
 }
 
+int Bug::getSize() const {
+    return size;
+}
+
 std::pair<int, int> Bug::getPosition() const {
     return position;
 }

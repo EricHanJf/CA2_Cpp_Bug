@@ -8,7 +8,7 @@
 #include <list>
 using namespace std;
 
-enum class Direction {North, East, South, West};
+enum class Direction {North = 1, East = 2, South = 3, West = 4};
 const int BOARD_WIDTH = 10;
 const int BOARD_HEIGHT = 10;
 
@@ -27,6 +27,7 @@ public:
     virtual void move() = 0;
     bool isWayBlocked() const ;
     int getID() const ;
+    int getSize() const;
     pair<int, int> getPosition() const ;
     bool isAlive() const ;
     void die();
