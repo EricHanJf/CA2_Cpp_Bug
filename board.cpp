@@ -96,3 +96,11 @@ void board::findAndDisplayBug(int id) const{
     cout << "Bug Id: "<< id << " Not found" <<endl;
 }
 
+void board::TapBoard() {
+    std::cout << "Tapping the Bug Board..." << std::endl;
+    for (Bug* bug : bug_vector) {
+        bug->move();
+    }
+    displayAllBugs();
+}
+

@@ -6,13 +6,14 @@ int main() {
     board board;
     int numberChoice;
     bool exit = false;
-    board.intializeBugs("bugs.txt");
     while(!exit){
         cout << " =============================================" << endl;
         cout << " |           Bug's Life Feature Menu         |" << endl;
         cout << " =============================================" << endl;
-        cout << " |           [1]. Display All Bugs           |" << endl;
-        cout << " |           [2]. Display Bug By ID          |" << endl;
+        cout << " |           [1]. Initialize Bug Board       |" << endl;
+        cout << " |           [2]. Display All Bugs           |" << endl;
+        cout << " |           [3]. Display Bug By ID          |" << endl;
+        cout << " |           [4]. Tap the Bug Board          |" << endl;
         cout << " |           [0]. Exit The Program           |" << endl;
         cout << " =============================================\n" << endl;
 
@@ -20,13 +21,20 @@ int main() {
         cin >> numberChoice;
         switch (numberChoice) {
             case 1:
-                board.displayAllBugs();
+                board.intializeBugs("bugs.txt");
+                cout << "Bug board initialized." << endl;
                 break;
             case 2:
+                board.displayAllBugs();
+                break;
+            case 3:
                 int BugId;
                 cout << "Please enter a Bug Id to search (eg. 101,102...)";
                 cin >> BugId;
                 board.findAndDisplayBug(BugId);
+                break;
+            case 4:
+                board.TapBoard();
                 break;
             case 0:
                 exit = true;

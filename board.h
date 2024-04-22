@@ -23,6 +23,8 @@ public:
     vector<Bug*> getBugs() const;
     void displayAllBugs() const;
     void findAndDisplayBug(int id) const;
+    void TapBoard();
+
 };
 
 
