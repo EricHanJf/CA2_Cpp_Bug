@@ -20,11 +20,15 @@ protected:
     int size;
     bool alive;
     list<pair<int,int>> path;
+    string status;
 
 public:
     Bug(int id, int x, int y, Direction dir, int size);
     virtual ~Bug() = default;
     virtual void move() = 0;
+    virtual string getType() const = 0;
+    string directionToString() const ;
+
     bool isWayBlocked() const ;
     int getID() const ;
     int getSize() const;
@@ -32,8 +36,10 @@ public:
     bool isAlive() const ;
     void die();
     void addPath(int x, int y);
-
+    void setStatus(const string& newstatus);
+    string getStatus() const;
+    const list<pair<int, int>>& getPath() const;
+    void setSize(int newSize);
 };
-
 
 #endif //CA2_CPP_BUG_BUG_H

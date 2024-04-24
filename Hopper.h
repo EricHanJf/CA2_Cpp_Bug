@@ -15,6 +15,8 @@ public:
     Hopper(int id, int x, int y, Direction dir, int size, int hopLength);
 
     void move() override;
+    string getType()const override;
+    void changeDirectionRandomly();
 };
 
 

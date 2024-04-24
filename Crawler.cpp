@@ -33,3 +33,7 @@ void Crawler::move() {
         addPath(position.first, position.second);
     }
 }
+
+string Crawler::getType() const {
+    return "Crawler";
+}

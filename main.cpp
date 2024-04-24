@@ -14,6 +14,10 @@ int main() {
         cout << " |           [2]. Display All Bugs           |" << endl;
         cout << " |           [3]. Display Bug By ID          |" << endl;
         cout << " |           [4]. Tap the Bug Board          |" << endl;
+        cout << " |           [5]. Display Bug Life History   |" << endl;
+        cout << " |           [6]. Write Life History To File |" << endl;
+        cout << " |           [7]. Display All Cell           |" << endl;
+        cout << " |           [8]. Run Simulation             |" << endl;
         cout << " |           [0]. Exit The Program           |" << endl;
         cout << " =============================================\n" << endl;
 
@@ -35,6 +39,18 @@ int main() {
                 break;
             case 4:
                 board.TapBoard();
+                break;
+            case 5:
+                board.displayBugLifeHistory();
+                break;
+            case 6:
+                board.writeLifeHistoryToFile();
+                break;
+            case 7:
+                board.displayAllCells();
+                break;
+            case 8:
+                board.runSimulation();
                 break;
             case 0:
                 exit = true;
