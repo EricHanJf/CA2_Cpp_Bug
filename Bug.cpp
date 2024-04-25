@@ -42,6 +42,18 @@ string Bug::directionToString() const {
         case Direction::West:
             return "West";
             break;
+        case Direction::NorthEast:
+            return "NorthEast";
+            break;
+        case Direction::SouthEast:
+            return "SouthEast";
+            break;
+        case Direction::SouthWest:
+            return "SouthWest";
+            break;
+        case Direction::NorthWest:
+            return "NorthWest";
+            break;
         default:
             return "Unknown";
 //        case Direction::North: return "North" break;

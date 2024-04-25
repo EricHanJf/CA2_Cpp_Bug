@@ -8,7 +8,7 @@
 #include <list>
 using namespace std;
 
-enum class Direction {North = 1, East = 2, South = 3, West = 4};
+enum class Direction {North = 1, East = 2, South = 3, West = 4,NorthEast=5, SouthEast=6, SouthWest=7, NorthWest=8};
 const int BOARD_WIDTH = 10;
 const int BOARD_HEIGHT = 10;
 

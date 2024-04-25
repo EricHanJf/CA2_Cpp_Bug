@@ -11,7 +11,9 @@ add_executable(CA2_Cpp_Bug main.cpp
         Hopper.h
         Hopper.cpp
         board.h
-        board.cpp)
+        board.cpp
+        Moth.h
+        Moth.cpp)
 # Adjust the path according to where SFML is installed
 set(SFML_DIR /usr/local/Cellar/sfml/2.6.1/lib/cmake/SFML)
 find_package(SFML COMPONENTS system window graphics audio network REQUIRED)

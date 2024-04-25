@@ -84,6 +84,13 @@ build CMakeFiles/CA2_Cpp_Bug.dir/board.cpp.o: CXX_COMPILER__CA2_Cpp_Bug_unscanne
   OBJECT_DIR = CMakeFiles/CA2_Cpp_Bug.dir
   OBJECT_FILE_DIR = CMakeFiles/CA2_Cpp_Bug.dir
 
+build CMakeFiles/CA2_Cpp_Bug.dir/Moth.cpp.o: CXX_COMPILER__CA2_Cpp_Bug_unscanned_Debug /Users/xhanhan/Library/CloudStorage/OneDrive-DundalkInstituteofTechnology/Year2$ C++/Exercise$ File$ of$ $ C++/CA2_Cpp_Bug/Moth.cpp || cmake_object_order_depends_target_CA2_Cpp_Bug
+  DEP_FILE = CMakeFiles/CA2_Cpp_Bug.dir/Moth.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
+  INCLUDES = -I/usr/local/Cellar/sfml/2.6.1/include -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/CA2_Cpp_Bug.dir
+  OBJECT_FILE_DIR = CMakeFiles/CA2_Cpp_Bug.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target CA2_Cpp_Bug
@@ -92,7 +99,7 @@ build CMakeFiles/CA2_Cpp_Bug.dir/board.cpp.o: CXX_COMPILER__CA2_Cpp_Bug_unscanne
 #############################################
 # Link the executable CA2_Cpp_Bug
 
-build CA2_Cpp_Bug: CXX_EXECUTABLE_LINKER__CA2_Cpp_Bug_Debug CMakeFiles/CA2_Cpp_Bug.dir/main.cpp.o CMakeFiles/CA2_Cpp_Bug.dir/Bug.cpp.o CMakeFiles/CA2_Cpp_Bug.dir/Crawler.cpp.o CMakeFiles/CA2_Cpp_Bug.dir/Hopper.cpp.o CMakeFiles/CA2_Cpp_Bug.dir/board.cpp.o | /opt/homebrew/lib/libsfml-graphics.2.6.1.dylib /opt/homebrew/lib/libsfml-audio.2.6.1.dylib /opt/homebrew/lib/libsfml-window.2.6.1.dylib /opt/homebrew/lib/libsfml-system.2.6.1.dylib
+build CA2_Cpp_Bug: CXX_EXECUTABLE_LINKER__CA2_Cpp_Bug_Debug CMakeFiles/CA2_Cpp_Bug.dir/main.cpp.o CMakeFiles/CA2_Cpp_Bug.dir/Bug.cpp.o CMakeFiles/CA2_Cpp_Bug.dir/Crawler.cpp.o CMakeFiles/CA2_Cpp_Bug.dir/Hopper.cpp.o CMakeFiles/CA2_Cpp_Bug.dir/board.cpp.o CMakeFiles/CA2_Cpp_Bug.dir/Moth.cpp.o | /opt/homebrew/lib/libsfml-graphics.2.6.1.dylib /opt/homebrew/lib/libsfml-audio.2.6.1.dylib /opt/homebrew/lib/libsfml-window.2.6.1.dylib /opt/homebrew/lib/libsfml-system.2.6.1.dylib
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/lib  /opt/homebrew/lib/libsfml-graphics.2.6.1.dylib  /opt/homebrew/lib/libsfml-audio.2.6.1.dylib  /opt/homebrew/lib/libsfml-window.2.6.1.dylib  /opt/homebrew/lib/libsfml-system.2.6.1.dylib
   OBJECT_DIR = CMakeFiles/CA2_Cpp_Bug.dir

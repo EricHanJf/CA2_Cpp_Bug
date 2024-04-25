@@ -6,12 +6,10 @@
 using namespace std;
 
 
-// Constructor
 Hopper::Hopper(int id, int x, int y, Direction dir, int size, int hopLength)
         : Bug(id, x, y, dir, size), hopLength(hopLength) {}
 
 
-// Move method specific to Hopper
 void Hopper::move() {
     bool moved = false;
     int attempts = 0;

@@ -3,6 +3,7 @@
 //
 
 #include "Board.h"
+#include "Moth.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -32,7 +33,7 @@ void board::intializeBugs(const string& filename) {
         istringstream iss(line);
         char type;
         int id, x, y, directionValue, size;
-        int hopLength = 0;  // Default value
+        int hopLength = 0;
         char delimiter;
         string status;
 
@@ -50,6 +51,10 @@ void board::intializeBugs(const string& filename) {
             case 2: dir = Direction::East; break;
             case 3: dir = Direction::South; break;
             case 4: dir = Direction::West; break;
+            case 5: dir = Direction::NorthEast; break;
+            case 6: dir = Direction::SouthEast; break;
+            case 7: dir = Direction::SouthWest; break;
+            case 8: dir = Direction::NorthWest; break;
             default:
                 cerr << "Invalid direction value: " << directionValue << endl;
                 continue;  // Skip this entry if the direction is invalid
@@ -71,6 +76,8 @@ void board::intializeBugs(const string& filename) {
             bug = new Crawler(id, x, y, dir, size);
         } else if (type == 'H' || type == 'h') {
             bug = new Hopper(id, x, y, dir, size, hopLength);
+        }else if(type =='M' || type =='m'){
+            bug = new Moth(id,x,y,dir,size);
         }
 
         // If a bug was created, set its status and add to the vector
@@ -90,7 +97,8 @@ void board::displayAllBugs() const {
     cout << "Display all Bugs:\n";
     cout << left;
     for (const Bug* bug : bug_vector) {
-        string type = dynamic_cast<const Crawler*>(bug) ? "Crawler" : "Hopper";
+//        string type = dynamic_cast<const Crawler*>(bug) ? "Crawler" : "Hopper";
+        string type = bug->getType();
         cout << setw(5) << bug->getID() << " "
                   << setw(8) << type << " "
                   << "(" << bug->getPosition().first << ","
@@ -105,8 +113,7 @@ void board::findAndDisplayBug(int id) const{
     for(const Bug* bug: bug_vector){
         if(bug ->getID() == id){
             cout << "Bug found: \n";
-            cout << "ID: " << bug->getID() << ", Type: "
-            << (dynamic_cast<const Crawler*>(bug)? "Crawler": "Hopper")
+            cout << "ID: " << bug->getID() << ", Type: " << bug->getType()
             << ", Position: (" << bug->getPosition().first << "," << bug->getPosition().second
             << "), Size: " << bug->getSize()
             << ", Status: " << (bug->isAlive() ? "Alive" : "Dead") << endl;
@@ -251,21 +258,40 @@ void board::writeLifeHistoryToFile() const {
     std::cout << "Life history written to " << fileName << std::endl;
 }
 
+//void board::displayAllCells() const {
+//    cout << "Displaying all cells:\n";
+//    for (int y = 0; y < BOARD_HEIGHT; ++y) {
+//        for (int x = 0; x < BOARD_WIDTH; ++x) {
+//            pair<int, int> cell(x, y);
+//            cout << "(" << x << "," << y << "): ";
+//            if (cellMap.find(cell) == cellMap.end() || cellMap.at(cell).empty()) {
+//                cout << "empty";
+//            } else {
+//                for (const auto& bug : cellMap.at(cell)) {
+//                    cout << (bug->getType() == "Crawler" ? "Crawler " : "Hopper ")
+//                              << bug->getID() << ", ";
+//                }
+//            }
+//            cout << endl;
+//        }
+//    }
+//}
+
 void board::displayAllCells() const {
-    std::cout << "Displaying all cells:\n";
+    cout << "Displaying all cells:\n";
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
         for (int x = 0; x < BOARD_WIDTH; ++x) {
-            std::pair<int, int> cell(x, y);
-            std::cout << "(" << x << "," << y << "): ";
+            pair<int, int> cell(x, y);
+            cout << "(" << x << "," << y << "): ";
             if (cellMap.find(cell) == cellMap.end() || cellMap.at(cell).empty()) {
-                std::cout << "empty";
+                cout << "empty";
             } else {
+                // Display each bug in the cell using polymorphism to get type information
                 for (const auto& bug : cellMap.at(cell)) {
-                    std::cout << (bug->getType() == "Crawler" ? "Crawler " : "Hopper ")
-                              << bug->getID() << ", ";
+                    cout << bug->getType() << " " << bug->getID() << ", ";
                 }
             }
-            std::cout << std::endl;
+            cout << endl;
         }
     }
 }
