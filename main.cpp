@@ -18,6 +18,7 @@ int main() {
         cout << " |           [6]. Write Life History To File |" << endl;
         cout << " |           [7]. Display All Cell           |" << endl;
         cout << " |           [8]. Run Simulation             |" << endl;
+        cout << " |           [9]. Display Bugs And Board     |" << endl;
         cout << " |           [0]. Exit The Program           |" << endl;
         cout << " =============================================\n" << endl;
 
@@ -51,6 +52,9 @@ int main() {
                 break;
             case 8:
                 board.runSimulation();
+                break;
+            case 9:
+                board.DisplayBoardAndBug();
                 break;
             case 0:
                 exit = true;

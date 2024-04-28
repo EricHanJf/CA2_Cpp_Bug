@@ -1,9 +1,10 @@
 //
 // Created by Eric Han on 15/04/2024.
 //
-
+#include <SFML/Graphics.hpp>
 #include "Board.h"
 #include "Moth.h"
+#include "Superbug.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -73,11 +74,11 @@ void board::intializeBugs(const string& filename) {
         // Create the appropriate bug type
         Bug* bug = nullptr;
         if (type == 'C' || type == 'c') {
-            bug = new Crawler(id, x, y, dir, size);
+            bug = new Crawler(id, x, y, dir, size,sf::Color::Red);
         } else if (type == 'H' || type == 'h') {
-            bug = new Hopper(id, x, y, dir, size, hopLength);
+            bug = new Hopper(id, x, y, dir, size, hopLength,sf::Color::Yellow);
         }else if(type =='M' || type =='m'){
-            bug = new Moth(id,x,y,dir,size);
+            bug = new Moth(id,x,y,dir,size,sf::Color::Green);
         }
 
         // If a bug was created, set its status and add to the vector
@@ -315,6 +316,131 @@ void board::runSimulation() {
     cout << "Simulation ended." << endl;
     displayBugLifeHistory();
 //    writeLifeHistoryToFile();
+}
+
+//void board::DisplayBoardAndBug() const{
+//    srand(time(NULL));
+//    sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
+//
+//    vector<Bug> bugs; // vector of Ball structures
+//    for (const auto& bug : bug_vector) {
+//        bugs.emplace_back(bug->getID(), 50, sf::Color::Cyan, bug->getPosition().first, bug->getPosition().second, bug->directionToString(), bug->getSize());
+//        bugs.emplace_back(bug->getID(),50,sf::Color::Black,bug->getPosition().first,bug->getPosition().second,bug->directionToString(),bug->getSize());
+//        bugs.emplace_back(bug->getID(), bug->getPosition().first, bug->getPosition().second, bug->directionToString(), bug->getSize());
+//
+//    };
+//    int size = 10;
+//    vector<sf::RectangleShape> board;
+//    bool blk = true;
+//    for (int x = 0; x < size; x++) {
+//        for (int y = 0; y < size; y++) {
+//            sf::RectangleShape rect(sf::Vector2f(50, 50));
+//            rect.setPosition(x * 50, y * 50);
+//            if (blk) {
+//                rect.setFillColor(sf::Color::Black);
+//
+//            } else {
+//                rect.setFillColor(sf::Color::White);
+//            }
+//            blk = !blk;
+//            board.push_back(rect);
+//        }
+//        blk = !blk;
+//    }
+//    while (window.isOpen()) {
+//        sf::Event event;
+//
+//        // Game loop - checks for events each time
+//        while (window.pollEvent(event)) {
+//            if (event.type == sf::Event::Closed)
+//                window.close();
+//            if (event.type == sf::Event::MouseButtonReleased) {
+//                if (event.mouseButton.button == sf::Mouse::Left) {
+//                    for (auto &b: bugs) {
+//                        b.move();
+//                    }
+//                }
+//
+//            }
+//        }
+//        window.clear(sf::Color::White);
+//            for (const auto& rect : board) {
+//                window.draw(rect);
+//            }
+//        for (const auto& b : bugs) {
+//            sf::CircleShape shape(10.f);
+//            shape.setFillColor(b.getColor());
+//            shape.setPosition((b.getPosition().first * 50) + 15, (b.getPosition().second * 50) + 15);
+//            window.draw(shape);
+//        }Ï
+//            if (event.type == sf::Event::KeyReleased) {
+//                cout << event.key.code << endl;
+//                cout << sf::Keyboard::C << endl;
+//                if (event.key.code == sf::Keyboard::Up) {
+//                    for (Ball &b: balls) {
+//                        b.move();
+//                    }
+//                }
+//            }
+//
+//
+//        window.display();
+//
+//    }
+//}
+void board::DisplayBoardAndBug(){
+    srand(time(NULL));
+    sf::RenderWindow window(sf::VideoMode(500, 500), "Bug Simulation");
+    int size = 10;  // Define the size of the board (10x10)
+    int cellSize = 50;  // Each cell has a size of 50x50 pixels
+
+    // Game loop managed here for simplicity
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+
+            // Check for mouse button release
+            if (event.type == sf::Event::MouseButtonReleased) {
+                if (event.mouseButton.button == sf::Mouse::Left) {
+//                    for (auto& bug : bug_vector) {
+//                        bug->move();  // Assume each bug has a move() method that updates its position
+//                    }
+//                    resolveConflicts();
+                    int aliveCount = count_if(bug_vector.begin(), bug_vector.end(), [](const Bug* b) { return b->isAlive(); });
+                    if (aliveCount > 1) {
+                        TapBoard();
+                    }
+
+                }
+            }
+        }
+
+        window.clear();
+        // Draw the grid
+        bool blk = true;
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                sf::RectangleShape rect(sf::Vector2f(cellSize, cellSize));
+                rect.setPosition(x * cellSize, y * cellSize);
+                rect.setFillColor(blk ? sf::Color::Black : sf::Color::White);
+                window.draw(rect);
+                blk = !blk;
+            }
+            blk = !blk;
+        }
+        for (const auto& bug : bug_vector) {
+            if (bug->isAlive()) {  // Only draw the bug if it is alive
+                sf::CircleShape shape(20);
+                shape.setFillColor(bug->getColor());
+                auto pos = bug->getPosition();
+                shape.setPosition(pos.first * cellSize + 5, pos.second * cellSize + 5);
+                window.draw(shape);
+            }
+        }
+        window.display();
+    }
 }
 
 

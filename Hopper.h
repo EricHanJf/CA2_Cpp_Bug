@@ -12,7 +12,8 @@ class Hopper : public Bug{
 private:
         int hopLength;
 public:
-    Hopper(int id, int x, int y, Direction dir, int size, int hopLength);
+//    Hopper(int id, int x, int y, Direction dir, int size, int hopLength);
+    Hopper(int id, int x, int y, Direction dir, int size, int hopLength, sf::Color color);
 
     void move() override;
     string getType()const override;

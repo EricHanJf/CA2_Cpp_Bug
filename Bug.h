@@ -1,7 +1,7 @@
 //
 // Created by Eric Han on 10/04/2024.
 //
-
+#include <SFML/Graphics.hpp>
 #ifndef CA2_CPP_BUG_BUG_H
 #define CA2_CPP_BUG_BUG_H
 #include <iostream>
@@ -21,14 +21,17 @@ protected:
     bool alive;
     list<pair<int,int>> path;
     string status;
+    sf::Color color;
 
 public:
-    Bug(int id, int x, int y, Direction dir, int size);
+    Bug(int id, int x, int y, Direction dir, int size,sf::Color color);
+    sf::Color getColor() const;
     virtual ~Bug() = default;
     virtual void move() = 0;
     virtual string getType() const = 0;
     string directionToString() const ;
 
+//    string getDirection() const;
     bool isWayBlocked() const ;
     int getID() const ;
     int getSize() const;

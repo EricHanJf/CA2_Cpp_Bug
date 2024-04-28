@@ -9,8 +9,12 @@ using namespace std;
 
 
 // Constructor implementation
-Bug::Bug(int id, int x, int y, Direction dir, int size)
-        : id(id), position({x, y}), direction(dir), size(size), alive(true), status("Alive"){}
+Bug::Bug(int id, int x, int y, Direction dir, int size, sf::Color color)
+        : id(id), position(x, y), direction(dir), size(size), color(color), alive(true) {}
+
+sf::Color Bug::getColor() const {
+    return color;
+}
 
 
 // Check if the bug's way is blocked
@@ -27,6 +31,8 @@ bool Bug::isWayBlocked() const {
     }
     return false;  // This should never be reached
 }
+
+
 
 string Bug::directionToString() const {
     switch (direction) {

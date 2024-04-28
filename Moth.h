@@ -12,10 +12,11 @@ using namespace std;
 class Moth : public Bug{
 
 public:
-    Moth(int id, int x, int y,Direction dir, int size);
+    Moth(int id, int x, int y, Direction dir, int size, sf::Color color);
 
     void move() override;
     string getType() const override;
+    void changeDirectionRandomly();
 
 };
 

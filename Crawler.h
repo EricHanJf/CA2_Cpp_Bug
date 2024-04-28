@@ -13,10 +13,9 @@ using namespace std;
 class Crawler : public Bug {
 
 public:
-    Crawler(int id, int x, int y, Direction dir, int size);
+    Crawler(int id, int x, int y, Direction dir, int size, sf::Color color);
 
     void move() override;
-
     string getType() const override;
 };
 

@@ -6,58 +6,83 @@
 using namespace std;
 
 
-Hopper::Hopper(int id, int x, int y, Direction dir, int size, int hopLength)
-        : Bug(id, x, y, dir, size), hopLength(hopLength) {}
 
+Hopper::Hopper(int id, int x, int y, Direction dir, int size, int hopLength, sf::Color color)
+        : Bug(id, x, y, dir, size, color) {
+    srand(time(NULL));
+}
 
 void Hopper::move() {
+    if (!alive) return; // If not alive, do not proceed with the move.
     bool moved = false;
     int attempts = 0;
 
-//    for (int i = 0; i < hopLength; ++i) {
-//        if (isWayBlocked()) {
-//            break;
-//        }
-    while (!moved && attempts < 4) {  // Try up to 4 different directions
-        for (int i = 0; i < hopLength; ++i) {
-            if (isWayBlocked()) {
-                // If blocked, try a new random direction if not moved yet
-                if (i == 0) {
-                    changeDirectionRandomly();
-                    break;  // Exit the for-loop and try a new direction
-                } else {
-                    // If it moved at least once, stop moving this turn
-                    addPath(position.first, position.second);
-                    return;
-                }
-            }
-
+    while (!moved && attempts < 4) {
+        int steps = 0;
+        while (steps < hopLength) {
+            // Execute movement based on the current direction
             switch (direction) {
                 case Direction::North:
-                    position.second -= 1;
+                    position.second--;
                     break;
                 case Direction::East:
-                    position.first += 1;
+                    position.first++;
                     break;
                 case Direction::South:
-                    position.second += 1;
+                    position.second++;
                     break;
                 case Direction::West:
-                    position.first -= 1;
+                    position.first--;
                     break;
             }
-            moved = true;
+            steps++;
+            // Check if the way is blocked after moving
+            if (isWayBlocked()) {
+                switch (direction) {
+                    case Direction::North:
+                        position.second++;
+                        break;
+                    case Direction::East:
+                        position.first--;
+                        break;
+                    case Direction::South:
+                        position.second--;
+                        break;
+                    case Direction::West:
+                        position.first++;
+                        break;
+                }
+                break;
+            }
+            moved = true; // Flag that movement has happened
         }
-        if(moved) {
+
+        if (!moved) {
+            changeDirectionRandomly();
+        } else {
             addPath(position.first, position.second);
         }
         attempts++;
     }
+
+    if (moved) {
+        addPath(position.first, position.second);
+    }
 }
 
+
+
+
 void Hopper::changeDirectionRandomly() {
-    srand(std::time(nullptr));
-    int newDirection = rand() % 4 + 1;
+//    srand(std::time(nullptr));
+//    int newDirection = rand() % 4 + 1;
+//    direction = static_cast<Direction>(newDirection);
+
+    int newDirection;
+    do {
+        newDirection = std::rand() % 4 + 1; // Ensure new direction is different
+    } while (newDirection == static_cast<int>(direction));
+
     direction = static_cast<Direction>(newDirection);
 }
 

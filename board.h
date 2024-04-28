@@ -30,7 +30,7 @@ public:
     void writeLifeHistoryToFile() const;
     void displayAllCells() const;
     void runSimulation();
-
+    void DisplayBoardAndBug();
 };
 
 
